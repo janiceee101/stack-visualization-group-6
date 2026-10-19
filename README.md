@@ -1,16 +1,14 @@
-# stack-visualization-group-6
 # Stack Virtualization
 # Group 6
 # Group Members
-- Janice Pabular
-- Kristel Angel Protacio
-- Kayen Faith S. Antiporta
-- Kier Costumban
-- Samraida Mamarda
+1. Janice Pabular
+2. Kristel Angel Protacio
+3. Kayen Faith S. Antiporta
+4. Kier Costumban
+5. Samraida Mamarda
 
-# Description
-Stack Visualization is a Java application that demonstrates how a stack works using a graphical user interface. It follows the Last-In, First-Out (LIFO) principle and allows users to perform stack operations while viewing the current contents of the stack. 
+# Description of the Program
+Stack Visualization is a Java-based application that demonstrates how a stack data structure works using a graphical user interface   
 
-#Features
-- Push a value onto the stack
-- Pop the top element
+
+

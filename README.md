@@ -7,3 +7,6 @@
 - Kayen Faith S. Antiporta
 - Kier Costumban
 - Samraida Mamarda
+
+# Description
+Stack Visualization is a Java application that demonstrates how a stack works using a graphical user interface. It follows the Last-In, First-Out (LIFO) principle

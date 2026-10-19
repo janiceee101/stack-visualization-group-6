@@ -17,4 +17,24 @@ public class ArrayStack {
     data = new int[CAPACITY];
     top = -1;
   }
+
+  // adds value on top, return false if the stack is full(overflow)
+  public boolean push(int value) {
+    if (top == CAPACITY - 1) {
+      return false;
+    }
+    top++;
+    data[top] = value;
+    return true;
+  }
+
+  // removes and returns the top element, throws if empty(underflow)
+  public int pop() {
+    if (top == -1) {
+      throw new IllegalStateException("STACK UNDERFLOW: Cannot pop, stack is empty");
+    }
+    int value = data[top];
+    top--;
+    return value;
+  }
 }

@@ -5,11 +5,11 @@
 
    Last Modified: October 19, 2026
 
-   Version: 1.1
+   Version: 1.2
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
-   Prompt: Prompt: Help me improve the Stack Visualizer GUI by adding PUSH, POP, PEEK, CLEAR, CHECK STACK, 
-   and RANDOM buttons arranged on the right side of the window.
+   Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
+   including PUSH, POP, PEEK, CLEAR, CHECK STACK, and RANDOM, and refresh the display after each operation.
 */
 
 import javax.swing.*;
@@ -58,9 +58,50 @@ public class StackGUI extends JFrame {
         add(controls, BorderLayout.EAST);
         add(statusLabel, BorderLayout.SOUTH);
 
+       // ---------- button actions ----------
+       pushBtn.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) { doPush(); }
+       });
+       popBtn.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) { doPop(); }
+       });
+       peekBtn.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) { doPeek(); }
+       });
+       clearBtn.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) { doClear(); }
+       }); 
+       checkBtn.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) { doCheck(); }
+       });
+       randomBtn.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) { doRandom(); }
+       });
+       // pressing Enter in the text field also pushes
+       inputField.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) { doPush(); }
+       });
+       
         pack();
         setLocationRelativeTo(null);
     }
+
+       // ================= operations (GUI -> ArrayStack methods) =================
+
+   private void doPush() { }
+   private void doPop() { }
+   private void doPeek() { }
+   private void doClear() { }
+   private void doCheck() { }
+   private void doRandom() { }
+
+   private void status(String msg) {
+      statusLabel.setText(msg);
+   }
+
+   private void refresh() { 
+      stackPanel.repaint();
+   }
 
     private class StackPanel extends JPanel {
         public StackPanel() {

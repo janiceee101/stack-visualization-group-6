@@ -20,7 +20,7 @@ public class ArrayStack {
 
   // adds value on top, return false if the stack is full(overflow)
   public boolean push(int value) {
-    if (top == CAPACITY - 1) {
+    if (isFull()) {
       return false;
     }
     top++;
@@ -30,11 +30,45 @@ public class ArrayStack {
 
   // removes and returns the top element, throws if empty(underflow)
   public int pop() {
-    if (top == -1) {
+    if (isEmpty()) {
       throw new IllegalStateException("STACK UNDERFLOW: Cannot pop, stack is empty");
     }
     int value = data[top];
     top--;
     return value;
+  }
+
+  // returns the top element without removing it, throws if empty
+  public int peek() {
+    if (isEmpty()) {
+      throw new IllegalStateException("STACK EMPTY: Nothing to peek, stack is empty");
+    }
+    return data[top];
+  }
+
+  public boolean isEmpty() {
+    return top == -1;
+  }
+
+  public boolean isFull() {
+    return top == CAPACITY - 1;
+  }
+
+  public int size() {
+    return top + 1;
+  }
+
+  public void clear() {
+    top = -1;
+  }
+
+  // returns a copy of the contents (bottom first) so the gui can draw
+  // without touching the internal array
+  public int[] toArray() {
+    int[] copy = new int[size()];
+    for (int i = 0; i < copy.length; i++) {
+      copy[i] = data[i];
+    }
+    return copy;
   }
 }

@@ -5,11 +5,11 @@
 
    Last Modified: October 19, 2026
 
-   Version: 1.0
+   Version: 1.1
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
-   Prompt:  Help me create a basic Java Swing GUI for our Stack Visualizer with a main window, 
-   stack display placeholder, input field, and status label, and explain the code simply.
+   Prompt: Prompt: Help me improve the Stack Visualizer GUI by adding PUSH, POP, PEEK, CLEAR, CHECK STACK, 
+   and RANDOM buttons arranged on the right side of the window.
 */
 
 import javax.swing.*;
@@ -30,11 +30,32 @@ public class StackGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
+        // ---------- controls (right side) ----------
+        JPanel controls = new JPanel(new GridLayout(9, 1, 5, 5));
+        controls.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 10));
+
+        JButton pushBtn = new JButton("PUSH");
+        JButton popBtn = new JButton("POP");
+        JButton peekBtn = new JButton("PEEK");
+        JButton clearBtn = new JButton("CLEAR");
+        JButton checkBtn = new JButton("CHECK STACK");
+        JButton randomBtn = new JButton("RANDOM");
+
+        controls.add(new JLabel("Enter a value:"));
+        controls.add(inputField);
+        controls.add(pushBtn);
+        controls.add(popBtn);
+        controls.add(peekBtn);
+        controls.add(clearBtn);
+        controls.add(checkBtn);
+        controls.add(randomBtn);
+
         // ---------- status (bottom) ----------
         statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 8, 10));
         statusLabel.setFont(new Font("SansSerif", Font.BOLD, 13));
 
         add(stackPanel, BorderLayout.CENTER);
+        add(controls, BorderLayout.EAST);
         add(statusLabel, BorderLayout.SOUTH);
 
         pack();

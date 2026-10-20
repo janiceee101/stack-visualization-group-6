@@ -5,12 +5,12 @@
 
    Last Modified: October 20, 2026
 
-   Version: 1.4
+   Version: 1.5
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
    Kristel Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
    including PUSH, POP, PEEK, CLEAR, CHECK STACK, and RANDOM, and refresh the display after each operation.
-   Kayen Prompt: 
+   Kayen Prompt: Help me highlight the top element in orange when PEEK is used and display the current stack size.
 */
 
 import javax.swing.*;
@@ -25,7 +25,8 @@ public class StackGUI extends JFrame {
     private StackPanel stackPanel = new StackPanel();
     private JTextField inputField = new JTextField(8);
     private JLabel statusLabel = new JLabel("Welcome! Enter a value and click PUSH.");
-
+    private boolean highlightPeek = false; 
+   
     public StackGUI() {
         super("Stack Visualizer (Array-based, capacity 10)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,8 +141,10 @@ public class StackGUI extends JFrame {
                 int y = base - (i + 1) * (SLOT_H + GAP) + GAP;
                 boolean isTop = (i == items.length - 1);
 
-                if (isTop) {
-                    g2.setColor(new Color(120, 190, 120));
+                if (isTop && highlightPeek) {
+                    g2.setColor(Color.ORANGE);
+                } else if (isTop) {
+                   g2.setColor(new Color(120, 190, 120));
                 } else {
                     g2.setColor(new Color(130, 170, 230));
                 }
@@ -163,6 +166,10 @@ public class StackGUI extends JFrame {
                 g2.setColor(Color.GRAY);
                 g2.drawString("(empty)", LEFT + 35, base - SLOT_H / 2);
             }
+
+           g2.setColor( Color.DARK_GRAY);
+           g2.setFont(new Font("SansSerif", Font.PLAIN, 12));
+           g2.drawString("Size: " + items.length + " / " + ArrayStack.CAPACITY, 5, 15);
         }
     }
     // ================= main =================

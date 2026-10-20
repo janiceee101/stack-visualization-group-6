@@ -5,7 +5,7 @@
 
    Last Modified: October 20, 2026
 
-   Version: 1.3
+   Version: 1.4
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
    Kristel Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
@@ -104,7 +104,7 @@ public class StackGUI extends JFrame {
       stackPanel.repaint();
    }
 
-  // ================= drawing panel =================
+      // ================= drawing panel =================
 
     private class StackPanel extends JPanel {
 
@@ -124,6 +124,7 @@ public class StackGUI extends JFrame {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
 
+            int[] items = stack.toArray();          // read a copy from the stack
             int base = getHeight() - 15;            // bottom of the stack
 
             // empty slots (outline)
@@ -131,6 +132,36 @@ public class StackGUI extends JFrame {
             for (int i = 0; i < ArrayStack.CAPACITY; i++) {
                 int y = base - (i + 1) * (SLOT_H + GAP) + GAP;
                 g2.drawRect(LEFT, y, BLOCK_W, SLOT_H);
+            }
+
+            // filled blocks, bottom to top
+            g2.setFont(new Font("SansSerif", Font.BOLD, 18));
+            for (int i = 0; i < items.length; i++) {
+                int y = base - (i + 1) * (SLOT_H + GAP) + GAP;
+                boolean isTop = (i == items.length - 1);
+
+                if (isTop) {
+                    g2.setColor(new Color(120, 190, 120));
+                } else {
+                    g2.setColor(new Color(130, 170, 230));
+                }
+                g2.fillRect(LEFT, y, BLOCK_W, SLOT_H);
+                g2.setColor(Color.BLACK);
+                g2.drawRect(LEFT, y, BLOCK_W, SLOT_H);
+
+                String s = String.valueOf(items[i]);
+                FontMetrics fm = g2.getFontMetrics();
+                g2.drawString(s, LEFT + (BLOCK_W - fm.stringWidth(s)) / 2,
+                        y + (SLOT_H + fm.getAscent()) / 2 - 3);
+
+                if (isTop) {
+                    g2.drawString("Top ->", 5, y + (SLOT_H + fm.getAscent()) / 2 - 3);
+                }
+            }
+
+            if (items.length == 0) {
+                g2.setColor(Color.GRAY);
+                g2.drawString("(empty)", LEFT + 35, base - SLOT_H / 2);
             }
         }
     }

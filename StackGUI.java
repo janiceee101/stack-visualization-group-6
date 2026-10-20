@@ -1,15 +1,16 @@
 /* Description: Swing GUI that visualizes an array-based stack in 2D. Every button
    calls a method of ArrayStack, then the panel is repainted from the stack's state.
 
-   Programmed by: Kristel Angel R. Protacio, BSIT, 48079, CC104
+   Programmed by: Kristel Angel R. Protacio, Kayen Faith S. Antiporta, BSIT, 48079, CC104
 
-   Last Modified: October 19, 2026
+   Last Modified: October 20, 2026
 
-   Version: 1.2
+   Version: 1.5
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
-   Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
+   Kristel Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
    including PUSH, POP, PEEK, CLEAR, CHECK STACK, and RANDOM, and refresh the display after each operation.
+   Kayen Prompt: Help me highlight the top element in orange when PEEK is used and display the current stack size.
 */
 
 import javax.swing.*;
@@ -24,7 +25,8 @@ public class StackGUI extends JFrame {
     private StackPanel stackPanel = new StackPanel();
     private JTextField inputField = new JTextField(8);
     private JLabel statusLabel = new JLabel("Welcome! Enter a value and click PUSH.");
-
+    private boolean highlightPeek = false; 
+   
     public StackGUI() {
         super("Stack Visualizer (Array-based, capacity 10)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,13 +105,73 @@ public class StackGUI extends JFrame {
       stackPanel.repaint();
    }
 
+      // ================= drawing panel =================
+
     private class StackPanel extends JPanel {
+
+        private final int SLOT_H = 40;
+        private final int GAP = 4;
+        private final int BLOCK_W = 140;
+        private final int LEFT = 70;
+
         public StackPanel() {
-            setPreferredSize(new Dimension(280, 10 * (40 + 4) + 40));
+            setPreferredSize(new Dimension(280, 10 * (SLOT_H + GAP) + 40));
             setBackground(Color.WHITE);
         }
-    }
 
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+
+            int[] items = stack.toArray();          // read a copy from the stack
+            int base = getHeight() - 15;            // bottom of the stack
+
+            // empty slots (outline)
+            g2.setColor(Color.LIGHT_GRAY);
+            for (int i = 0; i < ArrayStack.CAPACITY; i++) {
+                int y = base - (i + 1) * (SLOT_H + GAP) + GAP;
+                g2.drawRect(LEFT, y, BLOCK_W, SLOT_H);
+            }
+
+            // filled blocks, bottom to top
+            g2.setFont(new Font("SansSerif", Font.BOLD, 18));
+            for (int i = 0; i < items.length; i++) {
+                int y = base - (i + 1) * (SLOT_H + GAP) + GAP;
+                boolean isTop = (i == items.length - 1);
+
+                if (isTop && highlightPeek) {
+                    g2.setColor(Color.ORANGE);
+                } else if (isTop) {
+                   g2.setColor(new Color(120, 190, 120));
+                } else {
+                    g2.setColor(new Color(130, 170, 230));
+                }
+                g2.fillRect(LEFT, y, BLOCK_W, SLOT_H);
+                g2.setColor(Color.BLACK);
+                g2.drawRect(LEFT, y, BLOCK_W, SLOT_H);
+
+                String s = String.valueOf(items[i]);
+                FontMetrics fm = g2.getFontMetrics();
+                g2.drawString(s, LEFT + (BLOCK_W - fm.stringWidth(s)) / 2,
+                        y + (SLOT_H + fm.getAscent()) / 2 - 3);
+
+                if (isTop) {
+                    g2.drawString("Top ->", 5, y + (SLOT_H + fm.getAscent()) / 2 - 3);
+                }
+            }
+
+            if (items.length == 0) {
+                g2.setColor(Color.GRAY);
+                g2.drawString("(empty)", LEFT + 35, base - SLOT_H / 2);
+            }
+
+           g2.setColor( Color.DARK_GRAY);
+           g2.setFont(new Font("SansSerif", Font.PLAIN, 12));
+           g2.drawString("Size: " + items.length + " / " + ArrayStack.CAPACITY, 5, 15);
+        }
+    }
     // ================= main =================
 
     public static void main(String[] args) {

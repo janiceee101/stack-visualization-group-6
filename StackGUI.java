@@ -1,15 +1,16 @@
 /* Description: Swing GUI that visualizes an array-based stack in 2D. Every button
    calls a method of ArrayStack, then the panel is repainted from the stack's state.
 
-   Programmed by: Kristel Angel R. Protacio, BSIT, 48079, CC104
+   Programmed by: Kristel Angel R. Protacio, Kayen Faith S. Antiporta, BSIT, 48079, CC104
 
-   Last Modified: October 19, 2026
+   Last Modified: October 20, 2026
 
-   Version: 1.2
+   Version: 1.3
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
-   Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
+   Kristel Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
    including PUSH, POP, PEEK, CLEAR, CHECK STACK, and RANDOM, and refresh the display after each operation.
+   Kayen Prompt: 
 */
 
 import javax.swing.*;
@@ -103,13 +104,36 @@ public class StackGUI extends JFrame {
       stackPanel.repaint();
    }
 
+  // ================= drawing panel =================
+
     private class StackPanel extends JPanel {
+
+        private final int SLOT_H = 40;
+        private final int GAP = 4;
+        private final int BLOCK_W = 140;
+        private final int LEFT = 70;
+
         public StackPanel() {
-            setPreferredSize(new Dimension(280, 10 * (40 + 4) + 40));
+            setPreferredSize(new Dimension(280, 10 * (SLOT_H + GAP) + 40));
             setBackground(Color.WHITE);
         }
-    }
 
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+
+            int base = getHeight() - 15;            // bottom of the stack
+
+            // empty slots (outline)
+            g2.setColor(Color.LIGHT_GRAY);
+            for (int i = 0; i < ArrayStack.CAPACITY; i++) {
+                int y = base - (i + 1) * (SLOT_H + GAP) + GAP;
+                g2.drawRect(LEFT, y, BLOCK_W, SLOT_H);
+            }
+        }
+    }
     // ================= main =================
 
     public static void main(String[] args) {

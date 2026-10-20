@@ -1,16 +1,19 @@
 /* Description: Swing GUI that visualizes an array-based stack in 2D. Every button
    calls a method of ArrayStack, then the panel is repainted from the stack's state.
 
-   Programmed by: Kristel Angel R. Protacio, Kayen Faith S. Antiporta, BSIT, 48079, CC104
+   Programmed by: Kristel Angel R. Protacio, Kayen Faith S. Antiporta, Samraida P. Mamarda,
+   BSIT, 48079, CC104
 
    Last Modified: October 20, 2026
 
-   Version: 1.5
+   Version: 1.6
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
    Kristel Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
    including PUSH, POP, PEEK, CLEAR, CHECK STACK, and RANDOM, and refresh the display after each operation.
    Kayen Prompt: Help me highlight the top element in orange when PEEK is used and display the current stack size.
+   Sam Prompt: Help me implement the doPush() method to read an integer from the input field, push it onto the stack, 
+   and show a status message if the stack is full or the input is invalid.
 */
 
 import javax.swing.*;
@@ -90,7 +93,26 @@ public class StackGUI extends JFrame {
 
        // ================= operations (GUI -> ArrayStack methods) =================
 
-   private void doPush() { }
+   private void doPush() {
+        highlightPeek = false;
+        String text = inputField.getText().trim();
+        if (text.length() == 0) {
+            status("INPUT REQUIRED: Please type a whole number first");
+            return;
+        }
+        int value;
+        try {
+            value = Integer.parseInt(text);
+        } catch (NumberFormatException ex) {
+            status("INVALID INPUT: '" + text + "' is not a whole number");
+            return;
+        }
+        stack.push(value);
+        status("PUSHED " + value + " onto the stack");
+        inputField.setText("");
+        refresh();
+    }
+   
    private void doPop() { }
    private void doPeek() { }
    private void doClear() { }

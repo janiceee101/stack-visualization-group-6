@@ -6,14 +6,14 @@
 
    Last Modified: October 20, 2026
 
-   Version: 1.6
+   Version: 1.7
 
    Acknowledgements: Claude Sonnet 5.5 (Anthropic) was used to draft this code.
    Kristel Prompt: Help me connect the Stack Visualizer GUI buttons to their corresponding methods in ArrayStack, 
    including PUSH, POP, PEEK, CLEAR, CHECK STACK, and RANDOM, and refresh the display after each operation.
    Kayen Prompt: Help me highlight the top element in orange when PEEK is used and display the current stack size.
-   Sam Prompt: Help me implement the doPush() method to read an integer from the input field, push it onto the stack, 
-   and show a status message if the stack is full or the input is invalid.
+   Sam Prompt: Help me implement the doPop() and doPeek() methods to remove or view the top stack element and display
+   the appropriate status messages.
 */
 
 import javax.swing.*;
@@ -107,14 +107,38 @@ public class StackGUI extends JFrame {
             status("INVALID INPUT: '" + text + "' is not a whole number");
             return;
         }
-        stack.push(value);
-        status("PUSHED " + value + " onto the stack");
-        inputField.setText("");
+        if (stack.push(value)) {
+            status("PUSHED " + value + " onto the stack");
+            inputField.setText("");
+        } else {
+            status("STACK OVERFLOW: Cannot push, stack is full");
+        }
         refresh();
     }
    
-   private void doPop() { }
-   private void doPeek() { }
+   private void doPop() {
+        highlightPeek = false;
+        try {
+            int removed = stack.pop();
+            status("POPPED " + removed + " from the top of the stack");
+        } catch (IllegalStateException ex) {
+            status(ex.getMessage());
+        }
+        refresh();
+    }
+   
+   private void doPeek() {
+        try {
+            int top = stack.peek();
+            highlightPeek = true;
+            status("PEEK: Top element is " + top + " (not removed)");
+        } catch (IllegalStateException ex) {
+            highlightPeek = false;
+            status(ex.getMessage());
+        }
+        refresh();
+    }
+   
    private void doClear() { }
    private void doCheck() { }
    private void doRandom() { }

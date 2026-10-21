@@ -1,0 +1,80 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Class Diagram" id="stack-uml">
+    <mxGraphModel dx="1288" dy="778" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jframe" parent="1" style="rounded=0;whiteSpace=wrap;html=0;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="JFrame&#xa;(javax.swing)" vertex="1">
+          <mxGeometry height="50" width="120" x="140" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="gui" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="StackGUI" vertex="1">
+          <mxGeometry height="310" width="280" x="70" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="gui-attr" parent="gui" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="- stack: ArrayStack&#xa;- rnd: Random&#xa;- stackPanel: StackPanel&#xa;- inputField: JTextField&#xa;- statusLabel: JLabel&#xa;- highlightPeek: boolean" vertex="1">
+          <mxGeometry height="104" width="280" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="gui-line" parent="gui" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="280" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="gui-methods" parent="gui" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="+ StackGUI()&#xa;- doPush(): void&#xa;- doPop(): void&#xa;- doPeek(): void&#xa;- doClear(): void&#xa;- doCheck(): void&#xa;- doRandom(): void&#xa;- status(msg: String): void&#xa;- refresh(): void&#xa;+ main(args: String[]): void" vertex="1">
+          <mxGeometry height="172" width="280" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="stk" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;" value="ArrayStack" vertex="1">
+          <mxGeometry height="250" width="280" x="650" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="stk-attr" parent="stk" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="+ CAPACITY: int = 10 {static, final}&#xa;- data: int[]&#xa;- top: int" vertex="1">
+          <mxGeometry height="60" width="280" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="stk-line" parent="stk" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="280" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="stk-methods" parent="stk" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="+ ArrayStack()&#xa;+ push(value: int): boolean&#xa;+ pop(): int&#xa;+ peek(): int&#xa;+ isEmpty(): boolean&#xa;+ isFull(): boolean&#xa;+ size(): int&#xa;+ clear(): void&#xa;+ toArray(): int[]" vertex="1">
+          <mxGeometry height="156" width="280" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="panel" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#d6b656;" value="StackPanel (private inner class)" vertex="1">
+          <mxGeometry height="170" width="280" x="70" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="panel-attr" parent="panel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="- SLOT_H: int = 40&#xa;- GAP: int = 4&#xa;- BLOCK_W: int = 140&#xa;- LEFT: int = 70" vertex="1">
+          <mxGeometry height="76" width="280" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="panel-line" parent="panel" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="280" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="panel-methods" parent="panel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="+ StackPanel()&#xa;# paintComponent(g: Graphics): void" vertex="1">
+          <mxGeometry height="60" width="280" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="jpanel" parent="1" style="rounded=0;whiteSpace=wrap;html=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" value="JPanel&#xa;(javax.swing)" vertex="1">
+          <mxGeometry height="50" width="120" x="150" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gui-frame" edge="1" parent="1" source="gui" style="endArrow=block;endFill=0;html=1;rounded=0;labelBackgroundColor=#ffffff;" target="jframe" value="extends">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-panel-jpanel" edge="1" parent="1" source="panel" style="endArrow=block;endFill=0;html=1;rounded=0;labelBackgroundColor=#ffffff;" target="jpanel" value="extends">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gui-stk" edge="1" parent="1" style="endArrow=open;endFill=0;html=1;rounded=0;labelBackgroundColor=#ffffff;" value="(CALL METHODS)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="350" y="318.05" as="sourcePoint" />
+            <mxPoint x="650" y="318.05" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-gui-panel" edge="1" parent="1" source="gui" style="endArrow=none;startArrow=diamond;startFill=1;html=1;rounded=0;labelBackgroundColor=#ffffff;" target="panel" value="contains">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-panel-stk" edge="1" parent="1" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;labelBackgroundColor=#ffffff;" value="reads a copy via toArray()">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800" y="622.99" />
+            </Array>
+            <mxPoint x="353.92" y="622.99" as="sourcePoint" />
+            <mxPoint x="800" y="420.0013793103449" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tYUslOX9wZnUuBIq97OZ-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="USES" vertex="1">
+          <mxGeometry height="30" width="60" x="470" y="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

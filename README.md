@@ -322,7 +322,7 @@ It aims to make stack operations easier to understand through an interactive gra
 
 | Member                   | Contribution                                                                              |
 | ------------------------ | ----------------------------------------------------------------------------------------- |
-| Janice Pabular (Jas)     | Stack implementation (`ArrayStack.java`), GitHub repository setup, and UML class diagram. |
+| Janice Pabular           | Stack implementation (`ArrayStack.java`), GitHub repository setup, and UML class diagram. |
 | Kristel Angel Protacio   | Task 1, GUI layout, and buttons (`StackGUI.java`).                                        |
 | Kayen Faith S. Antiporta | Stack visualization using `StackGUI.java`.                                                |
 | Kier Costumban           | Testing and documentation.                                                                |
